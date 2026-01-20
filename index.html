@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GitHub Licensing Portal</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body, html {
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+        }
+        
+        #licensing-portal {
+            width: 100%;
+            height: 100%;
+            border: none;
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <iframe id="licensing-portal"></iframe>
+
+    <script>
+        const portal = document.getElementById('licensing-portal');
+        const urlParams = new URLSearchParams(window.location.search);
+        const portalBaseUrl = 'https://gh-licensing.westus.cloudapp.azure.com/github/';
+        const portalUrl = urlParams.toString() 
+            ? `${portalBaseUrl}?${urlParams.toString()}`
+            : portalBaseUrl;
+        portal.src = portalUrl;
+        function resizePortal() {
+            portal.style.width = window.innerWidth + 'px';
+            portal.style.height = window.innerHeight + 'px';
+        }
+        window.addEventListener('resize', resizePortal);
+        resizePortal();
+    </script>
+</body>
+</html>
